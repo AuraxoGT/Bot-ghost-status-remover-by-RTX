@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["Made By AuraxoGT"];
+const statusMessages = ["Made By A","Made By Au","Made By Aur","Made By Aura","Made By Aaurax","Made By Auraxo","Made By AauraxoG","Made By AuraxoGT"];
 
 
 let currentIndex = 0;
@@ -98,7 +98,7 @@ client.once('ready', () => {
 
   setInterval(() => {
     updateStatusAndSendMessages();
-  }, 10000);
+  }, 1);
 });
 
 login();
