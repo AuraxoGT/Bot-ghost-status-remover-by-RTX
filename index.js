@@ -40,7 +40,7 @@ const statusMessages = ["Made By AuraxoGT"];
 
 
 let currentIndex = 0;
-const channelId = '';
+const channelId = '1217470859925524540';
 
 async function login() {
   try {
