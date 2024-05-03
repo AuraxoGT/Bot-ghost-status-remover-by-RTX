@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["Made By AuraxoGT","MAFIA"];
+const statusMessages = ["Made By AuraxoGT","MAFIA","Los Angel RP"];
 
 
 let currentIndex = 0;
@@ -98,7 +98,7 @@ client.once('ready', () => {
 
   setInterval(() => {
     updateStatusAndSendMessages();
-  }, 1000);
+  }, 10000);
 });
 
 login();
