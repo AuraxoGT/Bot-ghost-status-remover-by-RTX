@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["Made By AuraxoGT","PD","Verba Roleplay","DM For Problems"];
+const statusMessages = ["Made By AuraxoGT","MAFIA","XC LEGACY RP","DM For Problems"];
 
 
 let currentIndex = 0;
