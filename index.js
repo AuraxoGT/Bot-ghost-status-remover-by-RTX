@@ -13,13 +13,9 @@
  * **********************************************
  */
 
-
-
-const { Client, GatewayIntentBits, ActivityType, TextChannel } = require('discord.js');
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((a) => {
     return GatewayIntentBits[a];
@@ -27,6 +23,7 @@ const client = new Client({
 });
 const app = express();
 const port = 3000;
+
 app.get('/', (req, res) => {
   res.send('YaY Your Bot Status Changed✨');
 });
@@ -35,9 +32,35 @@ app.listen(port, () => {
   console.log(`🔗 Powered By RTX`);
 });
 
-
-const statusMessages = ["Made By AuraxoGT","Saugau Baltarusijos Pasieni","Meškos Irštva"];
-
+const statusMessages = [
+  {
+    name: "Made By AuraxoGT",
+    details: "Developed by AuraxoGT",
+    state: "Keeping the Border Safe",
+    largeImageKey: "large_image",  // Add the name of your uploaded large image asset
+    largeImageText: "Meškos Irštva",  // Tooltip for the large image
+    smallImageKey: "small_image",  // Add the name of your uploaded small image asset
+    smallImageText: "RTX GAMING",  // Tooltip for the small image
+  },
+  {
+    name: "Saugau Baltarusijos Pasieni",
+    details: "Guarding the Belarus Border",
+    state: "Under Surveillance",
+    largeImageKey: "large_image",
+    largeImageText: "Saugau Pasieni",
+    smallImageKey: "small_image",
+    smallImageText: "",
+  },
+  {
+    name: "Meškos Irštva",
+    details: "The Bear's Lair",
+    state: "In the Wilderness",
+    largeImageKey: "large_image",
+    largeImageText: "Meškos Irštva",
+    smallImageKey: "small_image",
+    smallImageText: "RTX GAMING",
+  },
+];
 
 let currentIndex = 0;
 const channelId = '1217470859925524540';
@@ -52,39 +75,31 @@ async function login() {
   }
 }
 
-/**
- ██████╗░████████╗██╗░░██╗           
- ██╔══██╗╚══██╔══╝╚██╗██╔╝          
- ██████╔╝░░░██║░░░░╚███╔╝░          
- ██╔══██╗░░░██║░░░░██╔██╗░          
- ██║░░██║░░░██║░░░██╔╝╚██╗          
- ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
-GIT : https://github.com/RTX-GAMINGG/Bot-ghost-status-remover-by-RTX
-  DISCORD SERVER : https://discord.gg/FUEHs7RCqz
-  YOUTUBE : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
- * **********************************************
- *   Code by RTX GAMING
- * **********************************************
- */
-
-
 function updateStatusAndSendMessages() {
   const currentStatus = statusMessages[currentIndex];
-  const nextStatus = statusMessages[(currentIndex + 1) % statusMessages.length];
 
   client.user.setPresence({
-    activities: [{ name: currentStatus, type: ActivityType.Custom}],
+    activities: [{
+      name: currentStatus.name,
+      type: ActivityType.Playing,  // Change this as needed (e.g., ActivityType.Watching, ActivityType.Listening)
+      details: currentStatus.details,
+      state: currentStatus.state,
+      assets: {
+        large_image: currentStatus.largeImageKey,
+        large_text: currentStatus.largeImageText,
+        small_image: currentStatus.smallImageKey,
+        small_text: currentStatus.smallImageText,
+      },
+    }],
     status: 'dnd',
   });
 
-  
   const textChannel = client.channels.cache.get(channelId);
 
   if (textChannel instanceof TextChannel) {
-   
-    textChannel.send(`Bot status is: ${currentStatus}`);
+    textChannel.send(`Bot status is: ${currentStatus.name}`);
   } else {
-
+    console.warn(`Channel with ID ${channelId} is not a text channel or does not exist.`);
   }
 
   currentIndex = (currentIndex + 1) % statusMessages.length;
