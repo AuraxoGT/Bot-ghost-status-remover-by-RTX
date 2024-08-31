@@ -13,9 +13,13 @@
  * **********************************************
  */
 
-const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
+
+
+const { Client, GatewayIntentBits, ActivityType, TextChannel } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((a) => {
     return GatewayIntentBits[a];
@@ -23,7 +27,6 @@ const client = new Client({
 });
 const app = express();
 const port = 3000;
-
 app.get('/', (req, res) => {
   res.send('YaY Your Bot Status Changed✨');
 });
@@ -32,18 +35,9 @@ app.listen(port, () => {
   console.log(`🔗 Powered By RTX`);
 });
 
-const statusMessages = [
-  {
-    name: "Me6kos Ir6tva",
-    details: "Bot Made By AuraxoGT",
-    state: "Saugau Baltarusijos Pasieni",
-    largeImageKey: "large_image",  // Add the name of your uploaded large image asset
-    largeImageText: "Meškos Irštva",  // Tooltip for the large image
-    smallImageKey: "",  // Add the name of your uploaded small image asset
-    smallImageText: "",  // Tooltip for the small image
-  },
- 
-];
+
+const statusMessages = ["Made By AuraxoGT","Saugau Baltarusijos Pasieni","Meškos Irštva"];
+
 
 let currentIndex = 0;
 const channelId = '1217470859925524540';
@@ -58,31 +52,39 @@ async function login() {
   }
 }
 
+/**
+ ██████╗░████████╗██╗░░██╗           
+ ██╔══██╗╚══██╔══╝╚██╗██╔╝          
+ ██████╔╝░░░██║░░░░╚███╔╝░          
+ ██╔══██╗░░░██║░░░░██╔██╗░          
+ ██║░░██║░░░██║░░░██╔╝╚██╗          
+ ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
+GIT : https://github.com/RTX-GAMINGG/Bot-ghost-status-remover-by-RTX
+  DISCORD SERVER : https://discord.gg/FUEHs7RCqz
+  YOUTUBE : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
+ * **********************************************
+ *   Code by RTX GAMING
+ * **********************************************
+ */
+
+
 function updateStatusAndSendMessages() {
   const currentStatus = statusMessages[currentIndex];
+  const nextStatus = statusMessages[(currentIndex + 1) % statusMessages.length];
 
   client.user.setPresence({
-    activities: [{
-      name: currentStatus.name,
-      type: ActivityType.Playing,  // Change this as needed (e.g., ActivityType.Watching, ActivityType.Listening)
-      details: currentStatus.details,
-      state: currentStatus.state,
-      assets: {
-        large_image: currentStatus.largeImageKey,
-        large_text: currentStatus.largeImageText,
-        small_image: currentStatus.smallImageKey,
-        small_text: currentStatus.smallImageText,
-      },
-    }],
+    activities: [{ name: currentStatus, type: ActivityType.Custom}],
     status: 'dnd',
   });
 
+  
   const textChannel = client.channels.cache.get(channelId);
 
   if (textChannel instanceof TextChannel) {
-    textChannel.send(`Bot status is: ${currentStatus.name}`);
+   
+    textChannel.send(`Bot status is: ${currentStatus}`);
   } else {
-    console.warn(`Channel with ID ${channelId} is not a text channel or does not exist.`);
+
   }
 
   currentIndex = (currentIndex + 1) % statusMessages.length;
