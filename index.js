@@ -16,7 +16,7 @@ app.listen(port, () => {
   console.log(`🔗 Powered By RTX`);
 });
 
-const statusMessages = ["Made By AuraxoGT", "Saugau Baltarusijos Pasieni", "Meškos Irštva"];
+const statusMessages = [""];
 
 let currentIndex = 0;
 const channelId = '1217470859925524540';
