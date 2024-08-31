@@ -34,32 +34,15 @@ app.listen(port, () => {
 
 const statusMessages = [
   {
-    name: "Made By AuraxoGT",
-    details: "Developed by AuraxoGT",
-    state: "Keeping the Border Safe",
+    name: "Me6kos Ir6tva",
+    details: "Bot Made By AuraxoGT",
+    state: "Saugau Baltarusijos Pasieni",
     largeImageKey: "large_image",  // Add the name of your uploaded large image asset
     largeImageText: "Meškos Irštva",  // Tooltip for the large image
-    smallImageKey: "small_image",  // Add the name of your uploaded small image asset
-    smallImageText: "RTX GAMING",  // Tooltip for the small image
+    smallImageKey: "",  // Add the name of your uploaded small image asset
+    smallImageText: "",  // Tooltip for the small image
   },
-  {
-    name: "Saugau Baltarusijos Pasieni",
-    details: "Guarding the Belarus Border",
-    state: "Under Surveillance",
-    largeImageKey: "large_image",
-    largeImageText: "Saugau Pasieni",
-    smallImageKey: "small_image",
-    smallImageText: "",
-  },
-  {
-    name: "Meškos Irštva",
-    details: "The Bear's Lair",
-    state: "In the Wilderness",
-    largeImageKey: "large_image",
-    largeImageText: "Meškos Irštva",
-    smallImageKey: "small_image",
-    smallImageText: "RTX GAMING",
-  },
+ 
 ];
 
 let currentIndex = 0;
