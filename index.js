@@ -1,8 +1,6 @@
-const { Client, GatewayIntentBits, ActivityType, TextChannel } = require('discord.js');
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((a) => GatewayIntentBits[a]),
@@ -45,19 +43,25 @@ async function login() {
 
 function updateStatusAndSendMessages() {
   const currentStatus = statusMessages[currentIndex];
-  const nextStatus = statusMessages[(currentIndex + 1) % statusMessages.length];
 
+  // Set the presence with the richer data
   client.user.setPresence({
-    activities: [{ name: currentStatus.name, type: ActivityType.WATCHING }],
+    activities: [{
+      name: currentStatus.name,
+      type: ActivityType.Playing, // This can be 'Playing', 'Listening', 'Watching', etc.
+      details: currentStatus.details,
+      state: currentStatus.state,
+      assets: {
+        largeImage: currentStatus.largeImageKey, // The key of the image must be uploaded to your Discord application.
+        largeText: currentStatus.largeImageText,
+      },
+    }],
     status: 'dnd',
   });
 
   const textChannel = client.channels.cache.get(channelId);
-
-  if (textChannel instanceof TextChannel) {
-    textChannel.send(`Bot status is: ${currentStatus.name}`);
-  } else {
-    console.error(`Channel with ID ${channelId} is not accessible or does not exist.`);
+  if (textChannel) {
+    textChannel.send(`Bot status is: ${currentStatus.name} - ${currentStatus.details}`);
   }
 
   currentIndex = (currentIndex + 1) % statusMessages.length;
@@ -65,8 +69,6 @@ function updateStatusAndSendMessages() {
 
 client.once('ready', () => {
   console.log(`\x1b[36m%s\x1b[0m`, `|    ✅ Bot is ready as ${client.user.tag}`);
-  console.log(`\x1b[36m%s\x1b[0m`, `|    ✨HAPPY NEW YEAR MY DEAR FAMILY`);
-  console.log(`\x1b[36m%s\x1b[0m`, `|    ❤️WELCOME TO 2024`);
   updateStatusAndSendMessages();
 
   setInterval(() => {
