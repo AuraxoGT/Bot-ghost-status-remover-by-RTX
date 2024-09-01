@@ -23,7 +23,7 @@ const statusMessages = [
     name: "Meškos Irštva",
     details: "Made By AuraxoGT",
     state: "Saugau Baltarusijos Pasieni",
-    largeImageKey: "bear",
+    largeImageKey: "large_image",
     largeImageText: "Meškos Irštva",
   },
 ];
@@ -48,7 +48,7 @@ function updateStatusAndSendMessages() {
   client.user.setPresence({
     activities: [{
       name: currentStatus.name,
-      type: ActivityType.Playing, // This can be 'Playing', 'Listening', 'Watching', etc.
+      type: ActivityType.Streaming, // This can be 'Playing', 'Listening', 'Watching', etc.
       details: currentStatus.details,
       state: currentStatus.state,
       assets: {
