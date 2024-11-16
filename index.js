@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["💀 Made By AuraxoGT 💀"," 🟢⚪Žalgiris🟢⚪ ","🚫 Ryto Fanams NE 🚫"];
+const statusMessages = ["💎 FN CHEBRA 💎"];
 
 
 let currentIndex = 0;
