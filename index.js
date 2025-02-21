@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["NORDRP.LT"];
+const statusMessages = ["Gaujinis","Made By AuraxoGT];
 
 
 let currentIndex = 0;
