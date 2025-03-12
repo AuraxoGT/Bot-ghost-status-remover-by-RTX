@@ -36,7 +36,7 @@ app.listen(port, () => {
 });
 
 
-const statusMessages = ["DigitalZone","Made By AuraxoGT"];
+const statusMessages = ["NORDRP.LT","Made By AuraxoGT"];
 
 
 let currentIndex = 0;
